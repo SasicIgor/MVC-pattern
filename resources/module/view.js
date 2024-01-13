@@ -3,7 +3,7 @@ const view = (function () {
     let domStrings = {
         inputIngredient: '#ingredient',
         inputQuantity: '#quantity',
-        inputMeasurment: '#quantity_meaasurment',
+        inputMeasurement: '#quantity_measurment',
         inputType: '#ingredient_type',
         buttonSubmit: '.submit_button',
         buttonEdit: '.btn_green',
@@ -24,29 +24,29 @@ const view = (function () {
             return {
                 name: document.querySelector(domStrings.inputIngredient).value,
                 quantity: document.querySelector(domStrings.inputQuantity).value,
-                measurement: document.querySelector(domStrings.inputMeasurment).value,
+                measurement: document.querySelector(domStrings.inputMeasurement).value,
                 type: document.querySelector(domStrings.inputType).value,
             }
         },
         makeStorage:function(){
-            const coolerType=['meat','fish','fruits & vegetables','dairy','dry']
-            let html;
+            const coolerType=['meat','fish','vegetable','dairy','dry']
+            let html=``;
             let elem=domStrings.contentHolder;
             let flag=1;
             coolerType.forEach(elem => {
-                html=`<div class="cooler">
+                html+=`<div class="cooler">
                 <h2>${elem} cooler</h2>
                 <div class="cooler_ingredients cooler_ingredients${flag}">
-                <div class="cooler_items">
-                </div></div></div>`
+                
+                </div></div>`
                 flag++;
             })
-            console.log(elem)
-            document.querySelector(elem).appendChild(html);
+            document.querySelector(elem).insertAdjacentHTML("afterbegin",html);
         },
-        addItem:function(item){
+        addItem:function(item,type){
             let elem=domStrings.coolerIngredients+type;
             let html=`
+            <div class="cooler_items">
             <div class="cooler_item_info cooler_item_name">
                 <p class="cooler_item">${item.name}</p>
             </div>
@@ -57,9 +57,9 @@ const view = (function () {
                 <button class="btn_green"><img src="resources/images/pen-to-square-regular.svg" alt=""></button>
                 <button class="btn_red"><img src="resources/images/circle-xmark-regular.svg" alt=""></button>
             </div>
+            </div>
             `;
-            document.querySelector(elem).appendChild(html);
-
+            document.querySelector(elem).insertAdjacentHTML("afterbegin",html);
         }
 
     }

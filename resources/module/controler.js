@@ -11,7 +11,7 @@ let controler=function(model,view){
     let ctrlAddItem=function(){
         let input=view.getInput();
         let newItem=model.addItem(input.name,input.quantity,input.measurement,input.type);
-        addItem(newItem,input.type);
+        view.addItem(newItem,input.type);
     }
 
 
