@@ -46,7 +46,7 @@ const view = (function () {
         addItem:function(item,type){
             let elem=domStrings.coolerIngredients+type;
             let html=`
-            <div class="cooler_items">
+            <div class="cooler_items" id="id${type}${item.id}">
             <div class="cooler_item_info cooler_item_name">
                 <p class="cooler_item">${item.name}</p>
             </div>
@@ -54,8 +54,8 @@ const view = (function () {
                 <p>${item.quantity}${item.measurement}</p>
             </div>
             <div class="cooler_item_info">
-                <button class="btn_green"><img src="resources/images/pen-to-square-regular.svg" alt=""></button>
-                <button class="btn_red"><img src="resources/images/circle-xmark-regular.svg" alt=""></button>
+                <button class="btn_green" data-id='${type}${item.id}'><img src="resources/images/pen-to-square-regular.svg" alt=""></button>
+                <button class="btn_red" data-id='${type}${item.id}'>X</button>
             </div>
             </div>
             `;
@@ -69,6 +69,14 @@ const view = (function () {
                 measurement: document.querySelector(domStrings.inputMeasurement).value ='',
                 type: document.querySelector(domStrings.inputType).value ='',
             }
+        },
+        delItem: function (e){
+            let id=e.target.dataset.id;
+            let div=document.querySelector(`#id${id}`)
+            div.parentElement.removeChild(div);
+            // e.target.parentElement.parentElement.parentElement.innerHTML='';
+            return id;
+
         }
 
     }

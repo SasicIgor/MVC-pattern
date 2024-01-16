@@ -38,12 +38,19 @@ const model = (function () {
 
 
         },
-        // delItem: function (e){
-        //     console.log(e.target.dataset.id);
-        // }
+        deleteFromStorage: function (id){
+            console.log(id)
+            let cooler=id.charAt(0);
+            let item=id.charAt(1);
+            let fridge=storage.allCoolers[cooler];
+            for (let i=0;i<fridge.length;i++){
+                if(fridge[i].id==item){
+                    fridge.splice(i,1)
+                }
+            }
+            console.log(fridge)
+        }
     }
-
-
 
 })();
 

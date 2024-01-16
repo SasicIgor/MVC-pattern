@@ -7,24 +7,28 @@ let controler = function (model, view) {
 
         document.querySelector(DOM.buttonSubmit).addEventListener("click", ctrlAddItem);
     }
-    // let listenersEditDel = function (){
-    //     let DOM =view.getDomStrings();
+    let listenersEditDel = function (){
+        let DOM =view.getDomStrings();
 
-    //     document.querySelectorAll(DOM.buttonDelete).forEach(elem => {
-    //         if(elem.getAttribute('listener') != 'true'){
-    //             elem.addEventListener('click',model.delItem)
-    //         }
-    //     });
-    // }
+        document.querySelectorAll(DOM.buttonDelete).forEach(elem => {
+            if(elem.getAttribute('listener') != 'true'){
+                elem.addEventListener('click',delItem)
+            }
+        });
+    }
 
     let ctrlAddItem = function () {
         let input = view.getInput();
         let newItem = model.addItem(input.name, input.quantity, input.measurement, input.type, input.id);
         view.addItem(newItem, input.type);
         view.resetInput();
-        // listenersEditDel();
+        listenersEditDel();
     }
+    let delItem = function (e){
+        let id=view.delItem(e);
+        model.deleteFromStorage(id);
 
+    }
 
     return {
         init: function () {
