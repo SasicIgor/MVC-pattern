@@ -23,7 +23,6 @@ const model = (function () {
     return {
 
         addItem: function (name, quantity, measurement, type) {
-            console.log(storage)
             let id, item;
 
             if (storage.allCoolers[type].length > 0) {
@@ -38,7 +37,10 @@ const model = (function () {
             return item;
 
 
-        }
+        },
+        // delItem: function (e){
+        //     console.log(e.target.dataset.id);
+        // }
     }
 
 

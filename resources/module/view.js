@@ -60,6 +60,15 @@ const view = (function () {
             </div>
             `;
             document.querySelector(elem).insertAdjacentHTML("afterbegin",html);
+            
+        },
+        resetInput: function () {
+            return {
+                name: document.querySelector(domStrings.inputIngredient).value ='',
+                quantity: document.querySelector(domStrings.inputQuantity).value ='',
+                measurement: document.querySelector(domStrings.inputMeasurement).value ='',
+                type: document.querySelector(domStrings.inputType).value ='',
+            }
         }
 
     }
