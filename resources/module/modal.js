@@ -46,6 +46,7 @@ const model = (function () {
             for (let i=0;i<fridge.length;i++){
                 if(fridge[i].id==item){
                     fridge.splice(i,1)
+                    break
                 }
             }
             console.log(fridge)
