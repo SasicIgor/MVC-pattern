@@ -33,23 +33,27 @@ const model = (function () {
             }
             item = new StorageItem(id, name, quantity, measurement, type)
             storage.allCoolers[type].push(item)
-
+            console.log(storage.allCoolers)
             return item;
 
 
         },
-        deleteFromStorage: function (id){
-            console.log(id)
-            let cooler=id.charAt(0);
-            let item=id.charAt(1);
-            let fridge=storage.allCoolers[cooler];
-            for (let i=0;i<fridge.length;i++){
-                if(fridge[i].id==item){
-                    fridge.splice(i,1)
-                    break
+        editDeleteFromStorage: function (id, flag) {
+            let item = id.charAt(1);
+            let cooler = id.charAt(0);
+            let fridge = storage.allCoolers[cooler];
+            for (let i = 0; i < fridge.length; i++) {
+                if (fridge[i].id == item) {
+                    if (parseInt(flag) == 1) {
+                        fridge.splice(i, 1)
+                        break
+                    };
+                    if (parseInt(flag) == 0){
+                        return fridge[i];
+                    }
+                    
                 }
             }
-            console.log(fridge)
         }
     }
 

@@ -7,12 +7,17 @@ let controler = function (model, view) {
 
         document.querySelector(DOM.buttonSubmit).addEventListener("click", ctrlAddItem);
     }
-    let listenersEditDel = function (){
-        let DOM =view.getDomStrings();
+    let listenersEditDel = function () {
+        let DOM = view.getDomStrings();
 
         document.querySelectorAll(DOM.buttonDelete).forEach(elem => {
-            if(elem.getAttribute('listener') != 'true'){
-                elem.addEventListener('click',delItem)
+            if (elem.getAttribute('listener') != 'true') {
+                elem.addEventListener('click', editDelItem)
+            }
+        });
+        document.querySelectorAll(DOM.buttonEdit).forEach(elem => {
+            if (elem.getAttribute('listener') != 'true') {
+                elem.addEventListener('click', editDelItem)
             }
         });
     }
@@ -24,12 +29,17 @@ let controler = function (model, view) {
         view.resetInput();
         listenersEditDel();
     }
-    let delItem = function (e){
-        let id=view.delItem(e);
-        model.deleteFromStorage(id);
+    let editDelItem = function (e) {
+        let returns = view.delItem(e);
+        let id = returns[0];
+        let flag = returns[1];
+        let itemForEdit=model.editDeleteFromStorage(id,flag);
+        view.updateInput(itemForEdit);
 
     }
-
+    let editItem = function () {
+        let id = view.edtiItem(e);
+    }
     return {
         init: function () {
             listeners();

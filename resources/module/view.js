@@ -28,24 +28,24 @@ const view = (function () {
                 type: document.querySelector(domStrings.inputType).value,
             }
         },
-        makeStorage:function(){
-            const coolerType=['meat','fish','vegetable','dairy','dry']
-            let html=``;
-            let elem=domStrings.contentHolder;
-            let flag=1;
+        makeStorage: function () {
+            const coolerType = ['meat', 'fish', 'vegetable', 'dairy', 'dry']
+            let html = ``;
+            let elem = domStrings.contentHolder;
+            let flag = 1;
             coolerType.forEach(elem => {
-                html+=`<div class="cooler">
+                html += `<div class="cooler">
                 <h2>${elem} cooler</h2>
                 <div class="cooler_ingredients cooler_ingredients${flag}">
                 
                 </div></div>`
                 flag++;
             })
-            document.querySelector(elem).insertAdjacentHTML("afterbegin",html);
+            document.querySelector(elem).insertAdjacentHTML("afterbegin", html);
         },
-        addItem:function(item,type){
-            let elem=domStrings.coolerIngredients+type;
-            let html=`
+        addItem: function (item, type) {
+            let elem = domStrings.coolerIngredients + type;
+            let html = `
             <div class="cooler_items" id="id${type}${item.id}">
             <div class="cooler_item_info cooler_item_name">
                 <p class="cooler_item">${item.name}</p>
@@ -59,25 +59,39 @@ const view = (function () {
             </div>
             </div>
             `;
-            document.querySelector(elem).insertAdjacentHTML("afterbegin",html);
-            
+            document.querySelector(elem).insertAdjacentHTML("afterbegin", html);
+
         },
         resetInput: function () {
             return {
-                name: document.querySelector(domStrings.inputIngredient).value ='',
-                quantity: document.querySelector(domStrings.inputQuantity).value ='',
-                measurement: document.querySelector(domStrings.inputMeasurement).value ='',
-                type: document.querySelector(domStrings.inputType).value ='',
+                name: document.querySelector(domStrings.inputIngredient).value = '',
+                quantity: document.querySelector(domStrings.inputQuantity).value = '',
+                measurement: document.querySelector(domStrings.inputMeasurement).value = '',
+                type: document.querySelector(domStrings.inputType).value = '',
             }
         },
-        delItem: function (e){
-            let id=e.target.dataset.id;
-            let div=document.querySelector(`#id${id}`)
-            div.parentElement.removeChild(div);
-            // e.target.parentElement.parentElement.parentElement.innerHTML='';
-            return id;
-
+        delItem: function (e) {
+            let id = e.target.dataset.id;
+            let flag=0;//if flag return == 0 than it's pressed delete button , else it's edit button pressed
+            if (e.target.classList.contains("btn_red")) {
+                let div = document.querySelector(`#id${id}`)
+                div.parentElement.removeChild(div);
+                flag=1;
+            }
+            return [id,flag];
+        },
+        updateInput: function(item){
+            return {
+                name: document.querySelector(domStrings.inputIngredient).value = item.name,
+                quantity: document.querySelector(domStrings.inputQuantity).value = item.quantity,
+                measurement: document.querySelector(domStrings.inputMeasurement).value = item.measurement,
+                type: document.querySelector(domStrings.inputType).value = item.type,
+            }
         }
+        // editItem: function (e){
+        //     let id=e.target.dataset.id;
+
+        // }
 
     }
 })();
