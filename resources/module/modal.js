@@ -24,17 +24,41 @@ const model = (function () {
 
         addItem: function (name, quantity, measurement, type) {
             let id, item;
-
-            if (storage.allCoolers[type].length > 0) {
-                id = storage.allCoolers[type][storage.allCoolers[type].length - 1].id + 1
+            let fridge = storage.allCoolers[type];
+            let flag = 0;
+            if (fridge.length > 0) {
+                for (let i = 0; i < fridge.length; i++) {
+                    console.log(fridge[i]);
+                    if (fridge[i].name.toLowerCase() == name.toLowerCase()) {
+                        console.log(fridge[i]);
+                        fridge[i].quantity = parseInt(fridge[i].quantity) + parseInt(quantity);
+                        fridge[i].measurement = measurement;
+                        console.log(fridge[i]);
+                        flag = 1;
+                        let editedArray = [fridge[i], flag]
+                        return editedArray
+                    }
+                    // else {
+                    //     console.log("usao sam ovde")
+                    //     id = storage.allCoolers[type][storage.allCoolers[type].length - 1].id + 1
+                    //     item = new StorageItem(id, name, quantity, measurement, type)
+                    //     storage.allCoolers[type].push(item)
+                    //     let uneditedArray = [item, flag]
+                    //     return uneditedArray;
+                    // }
+                }
             }
-            else {
+            if (fridge.length == 0) {
                 id = 1;
             }
-            item = new StorageItem(id, name, quantity, measurement, type)
-            storage.allCoolers[type].push(item)
-            console.log(storage.allCoolers)
-            return item;
+            else {
+                id = storage.allCoolers[type][storage.allCoolers[type].length - 1].id + 1;
+            }
+            item = new StorageItem(id, name, quantity, measurement, type);
+            storage.allCoolers[type].push(item);
+            let uneditedArray = [item, flag]
+            console.log("zavrsavam")
+            return uneditedArray;
 
 
         },
@@ -48,10 +72,10 @@ const model = (function () {
                         fridge.splice(i, 1)
                         break
                     };
-                    if (parseInt(flag) == 0){
+                    if (parseInt(flag) == 0) {
                         return fridge[i];
                     }
-                    
+
                 }
             }
         }

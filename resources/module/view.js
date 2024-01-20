@@ -43,19 +43,19 @@ const view = (function () {
             })
             document.querySelector(elem).insertAdjacentHTML("afterbegin", html);
         },
-        addItem: function (item, type) {
-            let elem = domStrings.coolerIngredients + type;
+        addItem: function (newItem) {
+            let elem = domStrings.coolerIngredients + newItem.type;
             let html = `
-            <div class="cooler_items" id="id${type}${item.id}">
+            <div class="cooler_items" id="id${newItem.type}${newItem.id}">
             <div class="cooler_item_info cooler_item_name">
-                <p class="cooler_item">${item.name}</p>
+                <p class="cooler_item">${newItem.name}</p>
             </div>
             <div class="cooler_item_info cooler_item_quantity">
-                <p>${item.quantity}${item.measurement}</p>
+                <p>${newItem.quantity}${newItem.measurement}</p>
             </div>
             <div class="cooler_item_info">
-                <button class="btn_green" data-id='${type}${item.id}'><img src="resources/images/pen-to-square-regular.svg" alt=""></button>
-                <button class="btn_red" data-id='${type}${item.id}'>X</button>
+                <button class="btn_green" data-id='${newItem.type}${newItem.id}'><img src="resources/images/pen-to-square-regular.svg" alt=""></button>
+                <button class="btn_red" data-id='${newItem.type}${newItem.id}'>X</button>
             </div>
             </div>
             `;
@@ -87,11 +87,18 @@ const view = (function () {
                 measurement: document.querySelector(domStrings.inputMeasurement).value = item.measurement,
                 type: document.querySelector(domStrings.inputType).value = item.type,
             }
-        }
-        // editItem: function (e){
-        //     let id=e.target.dataset.id;
+        },
+        editItem: function (editedItem){
+            let cooler=document.querySelector(domStrings.coolerIngredients+editedItem.type);
+            let id=editedItem.type+editedItem.id;
+            let children=cooler.children;
+            for(let i=0;i<children.length;i++){
+                if(children[i].id==`id${id}`){
+                    children[i].children[1].children[0].textContent=`${editedItem.quantity}${editedItem.measurement}`;
+                }
+            }
 
-        // }
+        }
 
     }
 })();
