@@ -54,7 +54,7 @@ const view = (function () {
                 <p>${newItem.quantity}${newItem.measurement}</p>
             </div>
             <div class="cooler_item_info">
-                <button class="btn_green" data-id='${newItem.type}${newItem.id}'><img src="resources/images/pen-to-square-regular.svg" alt=""></button>
+                <button class="btn_green" data-id='${newItem.type}${newItem.id}'>edit</button>
                 <button class="btn_red" data-id='${newItem.type}${newItem.id}'>X</button>
             </div>
             </div>
